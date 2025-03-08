@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program Selection</title>
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Form Group */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        /* Styling Select Inputs */
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+        }
+
+        select:focus {
+            border-color: #007BFF;
+            background-color: #fff;
+            outline: none;
+        }
+
+        /* Submit Button */
+        .submit-button {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.2rem;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+
+        .submit-button:active {
+            background-color: #003f7f;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .form-container {
+                width: 100%;
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <form method="POST" class="program-selection-form">
+        {% csrf_token %}
+        <h2>Select Your Program</h2>
+        
+        <div class="form-group">
+            <label for="program">Select Program:</label>
+            <select name="program" id="program">
+                {% for program in programs %}
+                    <option value="{{ program.id }}">{{ program.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="year">Select Year:</label>
+            <select name="year" id="year">
+                <option value="1">Year 1</option>
+                <option value="2">Year 2</option>
+                <option value="3">Year 3</option>
+                <option value="4">Year 4</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="semester">Select Semester:</label>
+            <select name="semester" id="semester">
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="submit-button">View Courses</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

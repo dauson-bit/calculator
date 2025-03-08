@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course List</title>
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .course-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .course-list li {
+            background-color: #fafafa;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .course-list li select {
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 150px;
+            transition: all 0.3s ease;
+        }
+
+        .course-list li select:focus {
+            border-color: #007BFF;
+            background-color: #fff;
+            outline: none;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .submit-button {
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #007BFF;
+            font-size: 1.1rem;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                width: 100%;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .course-list li select {
+                width: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Courses for {{ program.name }} - Year {{ year }}, Semester {{ semester }}</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <ul class="course-list">
+            {% for course in courses %}
+            <li>
+                <div>
+                    <strong>{{ course.name }}</strong>
+                </div>
+                <div>
+                    <select name="grade_{{ course.id }}">
+                        <option value="">Select Grade</option>
+                        <option value="A">A (5.0)</option>
+                        <option value="B+">B+ (4.0)</option>
+                        <option value="B">B (3.0)</option>
+                        <option value="C">C (2.0)</option>
+                        <option value="sup">sup (0.0)</option>
+                        <option value="CRV">CRV (0.0)</option>
+                    </select>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        
+        <div class="button-container">
+            <button type="submit" class="submit-button">Submit Grades</button>
+        </div>
+    </form>
+
+    <a href="{% url 'program_selection' %}" class="back-link">Back to Program Selection</a>
+</div>
+
+</body>
+</html>

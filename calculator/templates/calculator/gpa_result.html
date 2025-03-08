@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ semester }} Results</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* Header Section */
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        main h2 {
+            color: #4CAF50;
+            margin-bottom: 1.5rem;
+        }
+
+        main p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #555;
+        }
+
+        /* Buttons */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            color: white;
+            background-color: #4CAF50;
+            text-decoration: none;
+            border-radius: 5px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background-color: #007BFF;
+        }
+
+        .btn-secondary:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>{{ semester }} Results</h1>
+    </header>
+
+    <main>
+        <h2>Year: {{ year }}</h2>
+
+        <p>Your GPA: <strong>{{ gpa }}</strong></p>
+
+        {% if next_link %}
+            <div class="btn-container">
+                <a href="{% url next_link.url program_id=next_link.program_id semester=next_link.semester year=next_link.year %}" class="btn">
+                    {% if semester == "Semester 1" %}
+                        Calculate Semester 2 Results
+                    {% elif semester == "Semester 2" %}
+                        View Overall GPA
+                    {% endif %}
+                </a>
+            </div>
+        {% endif %}
+
+        <div class="btn-container">
+            <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; {{ year }} GPA Calculator. All rights reserved.</p>
+    </footer>
+</body>
+</html>

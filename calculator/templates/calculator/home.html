@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPA Calculator - Login</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 400px;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+        .container img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin: 0 0 10px;
+            color: #333333;
+        }
+        p {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px 40px 10px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.95rem;
+        }
+        .form-group i {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+        .btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 10px;
+            color: #ffffff;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .btn i {
+            margin-left: 8px;
+        }
+        .btn-login {
+            background: #007bff; /* Blue color for login */
+        }
+        .btn-login:hover {
+            background: #0056b3;
+        }
+        .btn-signup {
+            background: #28a745; /* Green color for signup */
+            margin-top: 10px;
+        }
+        .btn-signup:hover {
+            background: #218838;
+        }
+        .link {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #007bff;
+            text-decoration: none;
+            text-align: right;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+        footer {
+            margin-top: 20px;
+            color: #6c757d;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo" />
+
+        <h1>Welcome to UDSM GPA Calculator </h1>
+        <p>Your credentials</p>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <i class="fas fa-user"></i>
+                <input type="text" class="form-control" placeholder="Username/Email" name="username" required>
+            </div>
+            <div class="form-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" class="form-control" placeholder="Password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-login">
+                Login <i class="fas fa-arrow-right"></i>
+            </button>
+            <p>Don't have an account?</p>
+        <a href="{% url 'signup' %}" class="signup">Sign Up</a>
+        </form>
+        
+    </div>
+    
+    <footer>
+        <p>&copy; {{ year|default:"2025" }} GPA Calculator. All rights reserved.</p>
+    </footer>
+</body>
+</html>

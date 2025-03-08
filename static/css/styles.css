@@ -1,0 +1,28 @@
+/* static/css/styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+.logo {
+    width: 150px;
+    height: auto;
+    margin: 10px;
+}
+.form-control {
+    width: calc(100% - 20px); /* Adjusts the width relative to the form's width */
+    padding: 10px 40px 10px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    box-sizing: border-box; /* Ensures padding and border are included in width */
+}
+/* General Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fc;
+    color: #333;
+    padding: 20px;
+    margin: 0;
+}
+
